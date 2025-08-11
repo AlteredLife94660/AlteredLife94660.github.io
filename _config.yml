@@ -2,3 +2,40 @@ title: TGB
 description: TGB website, testing space for future ideas
 theme: jekyll-theme-minimal # You can change this to other supported themes
 permalink: pretty
+baseurl: "" # since this is your user site
+url: "https://alteredlife94660.github.io"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Directory settings
+source: .
+destination: ./_site
+layouts_dir: _layouts
+includes_dir: _includes
+
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - project-structure.md
+  - security.md
