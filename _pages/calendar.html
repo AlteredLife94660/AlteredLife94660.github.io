@@ -5,122 +5,225 @@ description: Check out upcoming events and important dates
 permalink: /calendar
 last_modified_at: 2025-08-11
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .calendar-wrapper {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
 
-# Calendar & Events
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
-<div class="calendar-wrapper">
-    <div class="calendar-nav">
-        <button id="prevMonth">Previous</button>
-        <h2 id="currentMonth">August 2025</h2>
-        <button id="nextMonth">Next</button>
-    </div>
-    
-    <div id="calendar"></div>
-</div>
+        .calendar-nav button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
 
-<div class="upcoming-events">
-    <h3>✧ Upcoming Events ✧</h3>
-    <div class="event-card">
-        <h4>Website Launch</h4>
-        <p class="event-date">August 11, 2025</p>
-        <p>Official launch of the TGB website platform.</p>
-    </div>
-    
-    <div class="event-card">
-        <h4>Feature Release</h4>
-        <p class="event-date">September 1, 2025</p>
-        <p>New features and improvements coming to the platform.</p>
-    </div>
-</div>
+        .calendar-nav button:hover {
+            opacity: 0.9;
+        }
 
-<style>
-.calendar-wrapper {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    margin-bottom: 2rem;
-}
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            text-align: center;
+        }
 
-.calendar-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+        .calendar-header {
+            font-weight: bold;
+            color: var(--accent-color);
+            padding: 0.5rem;
+        }
 
-.calendar-nav button {
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
+        .calendar-day {
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.calendar-nav button:hover {
-    opacity: 0.9;
-}
+        .calendar-day:hover {
+            background-color: rgba(142, 68, 173, 0.1);
+        }
 
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
-    text-align: center;
-}
+        .calendar-day.current {
+            background-color: var(--accent-color);
+            color: white;
+        }
 
-.upcoming-events {
-    margin-top: 2rem;
-}
+        .calendar-day.has-event {
+            border: 2px solid var(--accent-color);
+        }
 
-.event-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    margin-bottom: 1rem;
-    border-left: 4px solid var(--accent-color);
-}
+        .upcoming-events {
+            margin-top: 2rem;
+        }
 
-.event-date {
-    color: var(--accent-color);
-    font-weight: 500;
-}
+        .event-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
 
-@media (max-width: 768px) {
-    .calendar-nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    #calendar {
-        font-size: 0.9rem;
-    }
-}
-</style>
+        .event-date {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Basic calendar functionality
-    const calendar = document.getElementById('calendar');
-    const currentMonth = document.getElementById('currentMonth');
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    
-    // Add day headers
-    days.forEach(day => {
-        const dayEl = document.createElement('div');
-        dayEl.className = 'calendar-header';
-        dayEl.textContent = day;
-        calendar.appendChild(dayEl);
-    });
-    
-    // Add placeholder for days (you would typically generate these dynamically)
-    for(let i = 1; i <= 31; i++) {
-        const dayEl = document.createElement('div');
-        dayEl.className = 'calendar-day';
-        dayEl.textContent = i;
-        calendar.appendChild(dayEl);
-    }
-});
-</script>
+        @media (max-width: 768px) {
+            .calendar-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            #calendar {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Calendar & Events</h1>
+
+        <div class="calendar-wrapper">
+            <div class="calendar-nav">
+                <button id="prevMonth">Previous</button>
+                <h2 id="currentMonth">August 2025</h2>
+                <button id="nextMonth">Next</button>
+            </div>
+            
+            <div id="calendar"></div>
+        </div>
+
+        <div class="upcoming-events">
+            <h3>✧ Upcoming Events ✧</h3>
+            <div class="event-card">
+                <h4>Website Launch</h4>
+                <p class="event-date">August 11, 2025</p>
+                <p>Official launch of the TGB website platform.</p>
+            </div>
+            
+            <div class="event-card">
+                <h4>Feature Release</h4>
+                <p class="event-date">September 1, 2025</p>
+                <p>New features and improvements coming to the platform.</p>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const calendar = document.getElementById('calendar');
+                const currentMonthElement = document.getElementById('currentMonth');
+                const prevButton = document.getElementById('prevMonth');
+                const nextButton = document.getElementById('nextMonth');
+
+                let currentDate = new Date('2025-08-11T18:01:23Z');
+                let displayedMonth = currentDate.getMonth();
+                let displayedYear = currentDate.getFullYear();
+
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                              'July', 'August', 'September', 'October', 'November', 'December'];
+
+                // Events data
+                const events = [
+                    { date: '2025-08-11', title: 'Website Launch' },
+                    { date: '2025-09-01', title: 'Feature Release' }
+                ];
+
+                function renderCalendar() {
+                    calendar.innerHTML = '';
+                    
+                    // Add day headers
+                    days.forEach(day => {
+                        const dayEl = document.createElement('div');
+                        dayEl.className = 'calendar-header';
+                        dayEl.textContent = day;
+                        calendar.appendChild(dayEl);
+                    });
+
+                    // Get first day of month and total days
+                    const firstDay = new Date(displayedYear, displayedMonth, 1);
+                    const lastDay = new Date(displayedYear, displayedMonth + 1, 0);
+                    
+                    // Add empty cells for days before start of month
+                    for(let i = 0; i < firstDay.getDay(); i++) {
+                        const emptyDay = document.createElement('div');
+                        emptyDay.className = 'calendar-day';
+                        calendar.appendChild(emptyDay);
+                    }
+
+                    // Add days of month
+                    for(let day = 1; day <= lastDay.getDate(); day++) {
+                        const dayEl = document.createElement('div');
+                        dayEl.className = 'calendar-day';
+                        dayEl.textContent = day;
+
+                        // Check if this is current day
+                        if (day === currentDate.getDate() && 
+                            displayedMonth === currentDate.getMonth() && 
+                            displayedYear === currentDate.getFullYear()) {
+                            dayEl.classList.add('current');
+                        }
+
+                        // Check if day has event
+                        const dateString = `${displayedYear}-${String(displayedMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                        if (events.some(event => event.date === dateString)) {
+                            dayEl.classList.add('has-event');
+                        }
+
+                        calendar.appendChild(dayEl);
+                    }
+
+                    // Update month display
+                    currentMonthElement.textContent = `${months[displayedMonth]} ${displayedYear}`;
+                }
+
+                // Event listeners for navigation
+                prevButton.addEventListener('click', () => {
+                    displayedMonth--;
+                    if (displayedMonth < 0) {
+                        displayedMonth = 11;
+                        displayedYear--;
+                    }
+                    renderCalendar();
+                });
+
+                nextButton.addEventListener('click', () => {
+                    displayedMonth++;
+                    if (displayedMonth > 11) {
+                        displayedMonth = 0;
+                        displayedYear++;
+                    }
+                    renderCalendar();
+                });
+
+                // Initial render
+                renderCalendar();
+            });
+        </script>
+    </main>
+</body>
+</html>
