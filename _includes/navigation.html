@@ -1,1 +1,7 @@
-navigation goes here
+<nav class="site-nav">
+    <ul class="nav-links">
+        <li><a href="/" {% if page.url == "/" %}class="active"{% endif %}>Home</a></li>
+        <li><a href="/about" {% if page.url == "/about" %}class="active"{% endif %}>About</a></li>
+        <li><a href="/calendar" {% if page.url == "/calendar" %}class="active"{% endif %}>Calendar</a></li>
+    </ul>
+</nav>
