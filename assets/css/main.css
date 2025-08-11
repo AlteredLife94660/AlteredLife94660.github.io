@@ -1,1 +1,161 @@
+/* Base styles and CSS Variables */
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #8e44ad;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --header-font: 'Cinzel', serif;  /* Fantasy-style font for headers */
+    --body-font: 'Raleway', sans-serif;
+    --shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    --magical-gradient: linear-gradient(135deg, #8e44ad, #3498db);
+}
 
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--body-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.site-header {
+    background: var(--magical-gradient);
+    color: white;
+    padding: 2rem 0;
+    box-shadow: var(--shadow);
+}
+
+.header-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.site-title a {
+    font-family: var(--header-font);
+    font-size: 2.5rem;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.site-description {
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* Navigation Styles */
+.site-nav {
+    background: white;
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    background: rgba(142, 68, 173, 0.1);
+}
+
+.nav-links a.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+/* Main Content Area */
+.content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+}
+
+/* Footer Styles */
+.site-footer {
+    background: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #a29bfe;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--header-font);
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .footer-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .footer-links {
+        margin-top: 1rem;
+    }
+}
+
+/* Fantasy Elements */
+.site-title a::after {
+    content: '✧';
+    margin-left: 0.5rem;
+    opacity: 0.8;
+}
+
+.site-title a::before {
+    content: '✧';
+    margin-right: 0.5rem;
+    opacity: 0.8;
+}
