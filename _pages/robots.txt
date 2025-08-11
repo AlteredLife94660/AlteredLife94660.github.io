@@ -1,2 +1,9 @@
 User-agent: *
+Disallow: /assets/
+Disallow: /.github/
+Disallow: /admin/
+Disallow: /private/
+
+# Prevent archive.org from caching
+User-agent: ia_archiver
 Disallow: /
