@@ -36,6 +36,16 @@
   --magical-gradient: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
 }
 
+/* Dark Theme */
+[data-theme="dark"] {
+  --color-background: #121212;
+  --color-white: #1e1e1e;
+  --color-text: #f5f5f5;
+  --color-primary: #bb86fc;
+  --color-secondary: #03dac6;
+  --color-border: #333;
+}
+
 /* Accessibility: Adjust for users who prefer larger text */
 @media (prefers-reduced-motion: reduce) {
   * {
