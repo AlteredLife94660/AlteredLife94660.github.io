@@ -1,7 +1,6 @@
 const Calendar = (() => {
   const calendarContainer = document.querySelector('[data-calendar]');
-  const eventContainer = document.getElementById('event-cards-container');
-  let events = [];
+  let events = []; // store loaded events
 
   const init = async () => {
     if (!calendarContainer) return;
@@ -15,7 +14,6 @@ const Calendar = (() => {
     }
 
     renderCalendar();
-    renderEventCards();
   };
 
   const renderCalendar = () => {
@@ -31,64 +29,62 @@ const Calendar = (() => {
 
     // Day headers
     const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    dayNames.forEach(day => {
-      html += `<div class="calendar__day-header">${day}</div>`;
-    });
+    dayNames.forEach(day => html += `<div class="calendar__day-header">${day}</div>`);
 
-    // Empty cells
-    for (let i = 0; i < startingDayOfWeek; i++) {
-      html += '<div class="calendar__empty"></div>';
-    }
+    // Empty slots
+    for (let i = 0; i < startingDayOfWeek; i++) html += '<div class="calendar__empty"></div>';
 
-    // Days
+    // Days of month
     for (let day = 1; day <= daysInMonth; day++) {
-      const isToday =
-        day === today.getDate() &&
-        month === today.getMonth() &&
-        year === today.getFullYear();
+      const classList = `calendar__day${day === today.getDate() && month === today.getMonth() ? ' calendar__day--today' : ''}`;
 
-      // Check if day has an event
+      // Check if this day has any events
       const dateString = `${year}-${String(month + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
       const hasEvent = events.some(e => e.date === dateString);
+      const eventClass = hasEvent ? ' has-event' : '';
 
-      const classList = `calendar__day${isToday ? ' calendar__day--today' : ''}${hasEvent ? ' calendar__day--event' : ''}`;
-      html += `<div class="${classList}" data-day="${day}" data-date="${dateString}">${day}</div>`;
+      html += `<div class="${classList}${eventClass}" data-day="${day}">${day}</div>`;
     }
 
     html += '</div></div>';
     calendarContainer.innerHTML = html;
+
+    // Optionally render upcoming/past events
+    renderEventCards();
   };
 
   const renderEventCards = () => {
-    if (!eventContainer) return;
-    eventContainer.innerHTML = ''; // clear existing cards
+    const upcomingContainer = document.querySelector('[data-upcoming-events]');
+    const pastContainer = document.querySelector('[data-past-events]');
+    if (!upcomingContainer && !pastContainer) return;
 
-    events.forEach(event => {
-      const card = document.createElement('div');
-      card.className = 'event-card';
-      card.innerHTML = `
-        <h4>${event.title}</h4>
-        <p class="event-date">${formatDate(event.date)}</p>
-        <p>${event.description}</p>
+    const today = new Date();
+    let upcomingHTML = '';
+    let pastHTML = '';
+
+    events.forEach(ev => {
+      const evDate = new Date(ev.date);
+      const cardHTML = `
+        <div class="event-card">
+          <h4>${ev.title}</h4>
+          <p class="event-date">${evDate.toDateString()}</p>
+          <p>${ev.description || ''}</p>
+        </div>
       `;
-      eventContainer.appendChild(card);
+      if (evDate >= today) upcomingHTML += cardHTML;
+      else pastHTML += cardHTML;
     });
+
+    if (upcomingContainer) upcomingContainer.innerHTML = upcomingHTML;
+    if (pastContainer) pastContainer.innerHTML = pastHTML;
   };
 
-  const formatDate = (iso) => {
-    const date = new Date(iso);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString(undefined, options);
-  };
-
-  const getMonthName = (monthIndex) => {
-    const months = ['January','February','March','April','May','June',
-                    'July','August','September','October','November','December'];
+  const getMonthName = monthIndex => {
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     return months[monthIndex];
   };
 
   return { init };
 })();
 
-// Initialize calendar on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => Calendar.init());
