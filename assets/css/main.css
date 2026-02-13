@@ -117,6 +117,43 @@ a:hover {
   margin: 0 var(--spacing-sm);
 }
 
+/* ================= Hero Section ================= */
+.hero-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-white);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-xl);
+    transition: all var(--transition-speed) ease;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-2xl);
+}
+
+.feature-card {
+    background: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, background var(--transition-speed) ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.latest-updates {
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-2xl);
+    background: rgba(142, 68, 173, 0.1);
+    border-radius: var(--border-radius);
+}
+
 /* ========================
    Responsive
 ======================== */
