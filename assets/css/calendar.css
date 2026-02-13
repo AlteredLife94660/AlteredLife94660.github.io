@@ -1,0 +1,114 @@
+/* ==============================
+   Calendar Container
+================================= */
+
+.calendar {
+  background: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+
+  box-shadow: var(--shadow);
+
+  width: min(100%, 26rem); /* ~416px */
+  margin: var(--spacing-xl) auto;
+}
+
+/* ==============================
+   Header
+================================= */
+
+.calendar h2 {
+  text-align: center;
+  color: var(--color-primary);
+  margin: 0 0 var(--spacing-lg);
+  font-size: var(--font-size-xl);
+}
+
+/* ==============================
+   Grid
+================================= */
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-sm);
+}
+
+/* ==============================
+   Day Headers
+================================= */
+
+.calendar__day-header {
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  padding: var(--spacing-sm);
+  color: var(--color-primary);
+  font-size: var(--font-size-small);
+}
+
+/* ==============================
+   Day Cells
+================================= */
+
+.calendar__day,
+.calendar__empty {
+  aspect-ratio: 1 / 1; /* Perfect squares */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar__day {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+
+  cursor: pointer;
+  color: var(--color-text);
+
+  transition:
+    background-color var(--transition-speed) ease,
+    border-color var(--transition-speed) ease,
+    transform var(--transition-speed) ease;
+}
+
+/* Hover */
+.calendar__day:hover {
+  background-color: var(--color-background);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Keyboard focus */
+.calendar__day:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Today */
+.calendar__day--today {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 0 0 2px var(--color-white) inset;
+}
+
+/* Selected (future-ready) */
+.calendar__day--selected {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+/* Empty cells */
+.calendar__empty {
+  visibility: hidden; /* Keeps layout but hides visually */
+}
+
+/* ==============================
+   Reduced Motion
+================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar__day {
+    transition: none;
+  }
+}
