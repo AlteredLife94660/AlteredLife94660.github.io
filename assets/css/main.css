@@ -136,7 +136,7 @@ a:hover {
 }
 
 .feature-card {
-    background: var(--color-white);
+    background: var(--color-primary);
     padding: var(--spacing-xl);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
