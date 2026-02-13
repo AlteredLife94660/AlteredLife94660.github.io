@@ -21,7 +21,8 @@
   const savedFontSize = localStorage.getItem('fontSize');
   const savedSpacing = localStorage.getItem('spacing');
   const savedThemeColor = localStorage.getItem('themeColor');
-
+  const savedTheme = localStorage.getItem('theme');
+      
   if (savedFontSize)
     document.documentElement.style.fontSize = savedFontSize + 'px';
 
@@ -30,6 +31,17 @@
 
   if (savedThemeColor)
     document.documentElement.style.setProperty('--color-primary', savedThemeColor);
+
+  if (savedTheme) {
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  } else {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute(
+      'data-theme',
+      prefersDark ? 'dark' : 'light'
+    );
+  }
+  
 </script>
 
 <!-- Fonts -->
@@ -128,6 +140,7 @@
 <!-- Scripts -->
 <script src="{{ '/assets/js/menu.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/accessibility.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
 
 {% if page.layout == 'calendar' %}
 <script src="{{ '/assets/js/calendar.js' | relative_url }}" defer></script>
