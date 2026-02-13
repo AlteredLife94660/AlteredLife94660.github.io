@@ -1,3 +1,28 @@
+/* ======================== 
+   Calendar Wrapper 
+======================== */
+.calendar-wrapper {
+  background: var(--color-background);
+  color: var(--color-text);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow);
+  max-width: 800px; /* Set a max-width for the calendar */
+  margin: 0 auto; /* Center the calendar wrapper */
+  transition: background var(--transition-speed) ease, color var(--transition-speed) ease, padding var(--transition-speed) ease;
+}
+
+/* ======================== 
+   Calendar Navigation 
+======================== */
+.calendar-nav {
+  display: flex;
+  justify-content: space-between; /* Distribute space between buttons and title */
+  align-items: center;
+  margin-bottom: var(--spacing-lg); /* Space below the navigation */
+  text-align: center;
+}
+
 /* ========================
    Calendar Container
 ======================== */
