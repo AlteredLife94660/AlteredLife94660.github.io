@@ -1,88 +1,36 @@
-/**
- * Sidebar Menu Module
- * Available on all pages
- */
-
 const Menu = (() => {
-  let sidebar;
-  let sidebarToggleBtn;
+  const sidebarToggleBtn = document.querySelector('[data-toggle-sidebar]');
+  const sidebar = document.querySelector('[data-sidebar]');
+  const overlay = document.querySelector('[data-sidebar-overlay]');
   const body = document.body;
-  const root = document.documentElement;
 
   const init = () => {
-    sidebar = document.querySelector('[data-sidebar]');
-    sidebarToggleBtn = document.querySelector('[data-toggle-sidebar]');
-
-    if (!sidebar || !sidebarToggleBtn) return;
-
-    sidebarToggleBtn.addEventListener('click', toggleSidebar);
+    if (sidebarToggleBtn) sidebarToggleBtn.addEventListener('click', toggleSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
     document.addEventListener('click', handleOutsideClick);
-    document.addEventListener('keydown', handleKeydown);
   };
 
   const toggleSidebar = () => {
-    const isOpen = sidebar.classList.toggle('sidebar--open');
-    body.classList.toggle('sidebar-open', isOpen);
-
-    sidebar.setAttribute('aria-hidden', !isOpen);
-    sidebarToggleBtn.setAttribute('aria-expanded', isOpen);
+    const open = sidebar.classList.toggle('sidebar--open');
+    overlay.style.pointerEvents = open ? 'auto' : 'none';
+    overlay.style.opacity = open ? '1' : '0';
+    sidebarToggleBtn.setAttribute('aria-expanded', open);
+    sidebar.setAttribute('aria-hidden', !open);
   };
 
   const closeSidebar = () => {
     sidebar.classList.remove('sidebar--open');
-    body.classList.remove('sidebar-open');
-
-    sidebar.setAttribute('aria-hidden', true);
+    overlay.style.pointerEvents = 'none';
+    overlay.style.opacity = '0';
     sidebarToggleBtn.setAttribute('aria-expanded', false);
+    sidebar.setAttribute('aria-hidden', true);
   };
 
   const handleOutsideClick = (e) => {
-    if (
-      sidebar.classList.contains('sidebar--open') &&
-      !sidebar.contains(e.target) &&
-      !sidebarToggleBtn.contains(e.target)
-    ) {
+    if (sidebar && !sidebar.contains(e.target) && !sidebarToggleBtn.contains(e.target)) {
       closeSidebar();
     }
   };
 
-  const handleKeydown = (e) => {
-    if (e.key === 'Escape') {
-      closeSidebar();
-    }
-  };
-
-  /**
-   * Accessibility settings
-   */
-  const applyAccessibilitySettings = (settings = {}) => {
-    if (settings.scale) {
-      // Better: scale entire UI
-      root.style.fontSize = settings.scale + '%';
-    }
-
-    if (settings.spacing) {
-      root.style.setProperty('--spacing-md', settings.spacing + 'rem');
-    }
-
-    if (settings.color) {
-      root.style.setProperty('--color-primary', settings.color);
-    }
-  };
-
-  return {
-    init,
-    toggleSidebar,
-    closeSidebar,
-    applyAccessibilitySettings,
-  };
+  return { init, toggleSidebar, closeSidebar };
 })();
-
-/**
- * Initialize when DOM is ready
- */
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', Menu.init);
-} else {
-  Menu.init();
-}
