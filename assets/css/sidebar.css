@@ -4,9 +4,10 @@
   top: 0;
   width: var(--sidebar-width);
   height: 100vh;
-  background: var(--color-white);
+  background: var(--color-background);
+  color: var(--color-text);
   box-shadow: var(--shadow-hover);
-  transition: left var(--transition-speed) ease;
+  transition: left var(--transition-speed) ease, background-color var(--transition-speed) ease, color var(--transition-speed) ease;
   z-index: 1000;
   overflow-y: auto;
   padding: var(--spacing-lg);
@@ -23,7 +24,7 @@
 }
 
 .sidebar__title {
-  font-size: var(--font-size-xl);
+  font-size: calc(var(--font-size-base) * 1.5);
   font-weight: var(--font-weight-bold);
   color: var(--color-primary);
   margin: 0;
