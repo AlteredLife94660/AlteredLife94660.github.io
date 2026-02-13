@@ -30,7 +30,7 @@ async function init() {
           ${data.key_features.map(feature => `<li>${feature}</li>`).join('')}
         </ul>
       </div>
-      <h2>✨ A Little Help From You?</h2>
+      <h2>A Little Help From You?</h2>
       <p>${data.call_to_action} <a href="/donations" class="donate-button">Support My Work</a></p>
     `;
   } catch (error) {
