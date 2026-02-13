@@ -8,11 +8,11 @@
   --color-border: #bdc3c7;
 
   /* Typography */
-  --font-family-main: 'Raleway', sans-serif;
-  --font-size-base: 16px;
-  --font-size-small: 14px;
-  --font-size-large: 18px;
-  --font-size-xl: 24px;
+  --font-family-main: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 1rem; /* 16px default */
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-large: 1.125rem; /* 18px */
+  --font-size-xl: 1.5rem; /* 24px */
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   --line-height: 1.6;
@@ -27,30 +27,21 @@
 
   /* Sizing */
   --sidebar-width: 250px;
-  --border-radius: 8px;
-  --transition-speed: 0.3s;
+  --border-radius: 0.5rem;
 
   /* Shadows & Effects */
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --magical-gradient: linear-gradient(135deg, #8e44ad 0%, #3498db 100%);
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
+  --transition-speed: 0.3s;
+
+  /* Dark Mode */
+  --dark-bg: #1e1e1e;
+  --dark-text: #ecf0f1;
+  --dark-primary: #9b59b6;
 }
 
-/* Dark Theme */
 [data-theme="dark"] {
-  --color-background: #121212;
-  --color-white: #1e1e1e;
-  --color-text: #f5f5f5;
-  --color-primary: #bb86fc;
-  --color-secondary: #03dac6;
-  --color-border: #333;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  --color-background: var(--dark-bg);
+  --color-text: var(--dark-text);
+  --color-primary: var(--dark-primary);
 }
