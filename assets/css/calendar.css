@@ -15,12 +15,33 @@
 /* ========================
    Calendar Header
 ======================== */
-.calendar h2 {
-  text-align: center;
-  color: var(--color-primary);
-  margin: 0 0 var(--spacing-lg) 0;
+.calendar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.calendar-header h2 {
+  margin: 0;
   font-size: var(--font-size-xl);
-  transition: color var(--transition-speed) ease, font-size var(--transition-speed) ease;
+  color: var(--color-primary);
+}
+
+.calendar-header button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.calendar-header button:hover {
+  background-color: var(--color-secondary);
 }
 
 /* ========================
@@ -76,6 +97,34 @@
   padding: var(--spacing-md);
 }
 
+/* ======================== 
+   Events 
+======================= */
+.events-container {
+  margin-top: var(--spacing-xl);
+}
+
+.events-container h3 {
+  font-size: var(--font-size-large);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.event-card {
+  background: var(--color-white);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid var(--color-primary);
+}
+
+.event-card .event-date {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+}
+
 /* ========================
    Dark Mode Overrides
 ======================== */
@@ -90,7 +139,7 @@
 }
 
 [data-theme="dark"] .calendar__day:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-background);
   border-color: var(--color-primary);
 }
 
@@ -101,4 +150,9 @@
 
 [data-theme="dark"] .calendar__day-header {
   color: var(--color-primary);
+}
+
+[data-theme="dark"] .event-card {
+  background: var(--color-background);
+  border-left: 4px solid var(--color-primary);
 }
