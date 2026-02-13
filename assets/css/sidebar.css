@@ -99,9 +99,9 @@
 /* Toggle Button */
 .sidebar-toggle {
   position: fixed;
-  top: var(--spacing-lg);
+  top: calc(var(--spacing-lg) +60px);
   left: var(--spacing-lg);
-  z-index: 999;
+  z-index: 1001;
   background: var(--color-primary);
   color: var(--color-white);
   border: none;
