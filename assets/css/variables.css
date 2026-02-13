@@ -8,11 +8,11 @@
   --color-border: #bdc3c7;
 
   /* Typography */
-  --font-family-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-small: 0.875rem; /* 14px */
-  --font-size-large: 1.125rem; /* 18px */
-  --font-size-xl: 1.5rem;      /* 24px */
+  --font-family-main: 'Raleway', sans-serif;
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 18px;
+  --font-size-xl: 24px;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
   --line-height: 1.6;
@@ -46,7 +46,7 @@
   --color-border: #333;
 }
 
-/* Accessibility: Adjust for users who prefer larger text */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
