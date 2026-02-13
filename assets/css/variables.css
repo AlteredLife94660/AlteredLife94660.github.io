@@ -6,6 +6,7 @@
   --color-background: #ecf0f1;
   --color-white: #ffffff;
   --color-border: #bdc3c7;
+  --magical-gradient: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
 
   /* Typography */
   --font-family-main: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
