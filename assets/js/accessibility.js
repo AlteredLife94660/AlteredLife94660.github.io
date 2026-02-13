@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Get controls
+  // --- Accessibility Controls ---
   const fontSizeInput = document.getElementById('font-size');
   const spacingInput = document.getElementById('spacing');
   const themeColorInput = document.getElementById('theme-color');
@@ -30,41 +30,61 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-theme', savedTheme);
   }
 
+  // --- Update UI Function ---
+  const updateUI = () => {
+    // Sidebar
+    document.querySelectorAll('.sidebar, .sidebar__nav-link').forEach(el => {
+      el.style.transition = `all var(--transition-speed) ease`;
+    });
+
+    // Calendar
+    document.querySelectorAll('.calendar, .calendar__day, .calendar__day-header').forEach(el => {
+      el.style.transition = `all var(--transition-speed) ease`;
+    });
+
+    // Other content
+    document.querySelectorAll('.content, .container').forEach(el => {
+      el.style.transition = `all var(--transition-speed) ease`;
+    });
+  };
+
+  updateUI();
+
   // --- Event Listeners ---
   if (fontSizeInput) {
-    fontSizeInput.addEventListener('input', (e) => {
+    fontSizeInput.addEventListener('input', e => {
       const value = e.target.value;
       document.documentElement.style.fontSize = value + 'px';
       localStorage.setItem('fontSize', value);
+      updateUI();
     });
   }
 
   if (spacingInput) {
-    spacingInput.addEventListener('input', (e) => {
+    spacingInput.addEventListener('input', e => {
       const value = e.target.value;
       document.documentElement.style.setProperty('--spacing-md', value + 'rem');
       localStorage.setItem('spacing', value);
+      updateUI();
     });
   }
 
   if (themeColorInput) {
-    themeColorInput.addEventListener('input', (e) => {
+    themeColorInput.addEventListener('input', e => {
       const value = e.target.value;
       document.documentElement.style.setProperty('--color-primary', value);
       localStorage.setItem('themeColor', value);
+      updateUI();
     });
   }
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
-      if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateUI();
     });
   }
 });
