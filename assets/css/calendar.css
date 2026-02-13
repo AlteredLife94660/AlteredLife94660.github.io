@@ -1,33 +1,52 @@
+/* ========================
+   Calendar Container
+======================== */
 .calendar {
-  background: var(--color-white);
+  background: var(--color-background);
+  color: var(--color-text);
   border-radius: var(--border-radius);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow);
   max-width: 400px;
   margin: var(--spacing-xl) auto;
+  transition: background var(--transition-speed) ease, color var(--transition-speed) ease, padding var(--transition-speed) ease;
 }
 
+/* ========================
+   Calendar Header
+======================== */
 .calendar h2 {
   text-align: center;
   color: var(--color-primary);
   margin: 0 0 var(--spacing-lg) 0;
   font-size: var(--font-size-xl);
+  transition: color var(--transition-speed) ease, font-size var(--transition-speed) ease;
 }
 
+/* ========================
+   Calendar Grid
+======================== */
 .calendar__grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: var(--spacing-sm);
 }
 
+/* ========================
+   Day Headers
+======================== */
 .calendar__day-header {
   font-weight: var(--font-weight-bold);
   text-align: center;
   padding: var(--spacing-md);
   color: var(--color-primary);
   font-size: var(--font-size-small);
+  transition: color var(--transition-speed) ease, font-size var(--transition-speed) ease;
 }
 
+/* ========================
+   Days
+======================== */
 .calendar__day {
   padding: var(--spacing-md);
   text-align: center;
@@ -36,19 +55,50 @@
   cursor: pointer;
   transition: all var(--transition-speed) ease;
   color: var(--color-text);
+  background: var(--color-white);
 }
 
+/* Hover & Active */
 .calendar__day:hover {
   background-color: var(--color-background);
   border-color: var(--color-primary);
 }
 
+/* Today */
 .calendar__day--today {
   background-color: var(--color-primary);
   color: var(--color-white);
   font-weight: var(--font-weight-bold);
 }
 
+/* Empty Cells */
 .calendar__empty {
   padding: var(--spacing-md);
+}
+
+/* ========================
+   Dark Mode Overrides
+======================== */
+[data-theme="dark"] .calendar {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .calendar__day {
+  background: var(--color-background);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .calendar__day:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .calendar__day--today {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+[data-theme="dark"] .calendar__day-header {
+  color: var(--color-primary);
 }
