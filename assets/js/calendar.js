@@ -1,11 +1,20 @@
 const Calendar = (() => {
   const calendarContainer = document.querySelector('[data-calendar]');
-  let events = []; // store loaded events
+  const upcomingContainer = document.getElementById('upcomingEvents');
+  const pastContainer = document.getElementById('pastEvents');
+  const currentMonthEl = document.getElementById('currentMonth');
+  const prevButton = document.getElementById('prevMonth');
+  const nextButton = document.getElementById('nextMonth');
+
+  let events = [];
+  let today = new Date();
+  let displayedMonth = today.getMonth();
+  let displayedYear = today.getFullYear();
 
   const init = async () => {
     if (!calendarContainer) return;
 
-    // Load events from JSON
+    // Fetch events
     try {
       const response = await fetch('/assets/data/events.json');
       events = await response.json();
@@ -14,74 +23,125 @@ const Calendar = (() => {
     }
 
     renderCalendar();
+    renderEvents();
+
+    // Navigation buttons
+    prevButton.addEventListener('click', () => {
+      displayedMonth--;
+      if (displayedMonth < 0) {
+        displayedMonth = 11;
+        displayedYear--;
+      }
+      renderCalendar();
+    });
+
+    nextButton.addEventListener('click', () => {
+      displayedMonth++;
+      if (displayedMonth > 11) {
+        displayedMonth = 0;
+        displayedYear++;
+      }
+      renderCalendar();
+    });
   };
 
   const renderCalendar = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
+    calendarContainer.innerHTML = '';
+    const firstDay = new Date(displayedYear, displayedMonth, 1);
+    const lastDay = new Date(displayedYear, displayedMonth + 1, 0);
     const startingDayOfWeek = firstDay.getDay();
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    let html = `<div class="calendar"><h2>${getMonthName(month)} ${year}</h2><div class="calendar__grid">`;
+    // Calendar header
+    currentMonthEl.textContent = `${getMonthName(displayedMonth)} ${displayedYear}`;
+
+    let html = '<div class="calendar"><div class="calendar__grid">';
 
     // Day headers
-    const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    dayNames.forEach(day => html += `<div class="calendar__day-header">${day}</div>`);
+    dayNames.forEach(day => {
+      html += `<div class="calendar__day-header">${day}</div>`;
+    });
 
     // Empty slots
-    for (let i = 0; i < startingDayOfWeek; i++) html += '<div class="calendar__empty"></div>';
+    for (let i = 0; i < startingDayOfWeek; i++) {
+      html += '<div class="calendar__empty"></div>';
+    }
 
-    // Days of month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const classList = `calendar__day${day === today.getDate() && month === today.getMonth() ? ' calendar__day--today' : ''}`;
+    // Days
+    for (let day = 1; day <= lastDay.getDate(); day++) {
+      const dayDate = new Date(displayedYear, displayedMonth, day);
+      const isToday =
+        dayDate.toDateString() === today.toDateString();
 
-      // Check if this day has any events
-      const dateString = `${year}-${String(month + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-      const hasEvent = events.some(e => e.date === dateString);
-      const eventClass = hasEvent ? ' has-event' : '';
+      // Check if there is an event
+      const dayEvents = events.filter(ev => ev.date === formatDate(dayDate));
+      const classList = `calendar__day${isToday ? ' calendar__day--today' : ''}${dayEvents.length ? ' has-event' : ''}`;
 
-      html += `<div class="${classList}${eventClass}" data-day="${day}">${day}</div>`;
+      html += `<div class="${classList}" data-day="${day}">${day}</div>`;
     }
 
     html += '</div></div>';
     calendarContainer.innerHTML = html;
-
-    // Optionally render upcoming/past events
-    renderEventCards();
   };
 
-  const renderEventCards = () => {
-    const upcomingContainer = document.querySelector('[data-upcoming-events]');
-    const pastContainer = document.querySelector('[data-past-events]');
-    if (!upcomingContainer && !pastContainer) return;
+  const renderEvents = () => {
+    upcomingContainer.innerHTML = '';
+    pastContainer.innerHTML = '';
 
-    const today = new Date();
-    let upcomingHTML = '';
-    let pastHTML = '';
+    const now = new Date();
 
-    events.forEach(ev => {
-      const evDate = new Date(ev.date);
-      const cardHTML = `
-        <div class="event-card">
-          <h4>${ev.title}</h4>
-          <p class="event-date">${evDate.toDateString()}</p>
-          <p>${ev.description || ''}</p>
-        </div>
-      `;
-      if (evDate >= today) upcomingHTML += cardHTML;
-      else pastHTML += cardHTML;
-    });
+    const upcoming = events.filter(ev => new Date(ev.date) >= now);
+    const past = events.filter(ev => new Date(ev.date) < now);
 
-    if (upcomingContainer) upcomingContainer.innerHTML = upcomingHTML;
-    if (pastContainer) pastContainer.innerHTML = pastHTML;
+    // Sort by date
+    upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+    past.sort((a, b) => new Date(b.date) - new Date(a.date)); // newest first
+
+    // Render upcoming
+    if (upcoming.length) {
+      upcoming.forEach(ev => {
+        const card = createEventCard(ev);
+        upcomingContainer.appendChild(card);
+      });
+    } else {
+      upcomingContainer.innerHTML = '<p>No upcoming events.</p>';
+    }
+
+    // Render past
+    if (past.length) {
+      past.forEach(ev => {
+        const card = createEventCard(ev);
+        pastContainer.appendChild(card);
+      });
+    } else {
+      pastContainer.innerHTML = '<p>No past events.</p>';
+    }
   };
 
-  const getMonthName = monthIndex => {
+  const createEventCard = (ev) => {
+    const div = document.createElement('div');
+    div.className = 'event-card';
+    div.innerHTML = `
+      <h4>${ev.title}</h4>
+      <p class="event-date">${formatDateReadable(ev.date)}</p>
+      <p>${ev.description}</p>
+    `;
+    return div;
+  };
+
+  const getMonthName = (monthIndex) => {
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     return months[monthIndex];
+  };
+
+  const formatDate = (date) => {
+    // YYYY-MM-DD
+    return date.toISOString().split('T')[0];
+  };
+
+  const formatDateReadable = (dateStr) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
   return { init };
