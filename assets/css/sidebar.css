@@ -45,7 +45,7 @@
   color: var(--color-text);
   text-decoration: none;
   border-radius: var(--border-radius);
-  transition: background-color var(--transition-speed) ease;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 .sidebar__nav-link:hover {
@@ -53,6 +53,7 @@
   color: var(--color-primary);
 }
 
+/* Accessibility Section */
 .sidebar__section {
   margin-top: var(--spacing-xl);
   padding-top: var(--spacing-xl);
@@ -86,14 +87,12 @@
 
 .control-group input[type="range"],
 .control-group input[type="color"],
-.control-group select,
-.control-group button {
+.control-group select {
   padding: var(--spacing-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
-  cursor: pointer;
 }
 
 /* Toggle Button */
@@ -101,48 +100,4 @@
   position: fixed;
   top: var(--spacing-lg);
   left: var(--spacing-lg);
-  z-index: 999;
-  background: var(--color-primary);
-  color: var(--color-white);
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-xl);
-  transition: background-color var(--transition-speed) ease;
-}
-
-.sidebar-toggle:hover {
-  background-color: var(--color-secondary);
-}
-
-/* Overlay */
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-speed) ease;
-  z-index: 900;
-}
-
-.sidebar--open + .sidebar-overlay {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 80vw;
-  }
-}
-
+  z-index:
