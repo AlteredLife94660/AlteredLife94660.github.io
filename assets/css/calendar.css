@@ -17,11 +17,28 @@
 ======================== */
 .calendar-nav {
   display: flex;
-  justify-content: space-between; /* Distribute space between buttons and title */
+  justify-content: center; /* Center the navigation buttons and title */
   align-items: center;
   margin-bottom: var(--spacing-lg); /* Space below the navigation */
   text-align: center;
+  gap: var(--spacing-md); /* Add spacing between the buttons and the month title */
 }
+
+.calendar-nav button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.calendar-nav button:hover {
+  background-color: var(--color-secondary);
+}
+
 
 /* ========================
    Calendar Container
