@@ -34,9 +34,9 @@
 
 <!-- Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/variables.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/sidebar.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/calendar.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
 </head>
 
@@ -52,7 +52,7 @@
     data-toggle-sidebar
     aria-label="Toggle sidebar"
     aria-expanded="false">
-    ☰
+      ☰
   </button>
 
   <!-- Sidebar -->
@@ -67,13 +67,13 @@
         <li><a href="{{ '/' | relative_url }}" class="sidebar__nav-link">Home</a></li>
         <li><a href="{{ '/calendar' | relative_url }}" class="sidebar__nav-link">Calendar</a></li>
         <li><a href="{{ '/about' | relative_url }}" class="sidebar__nav-link">About</a></li>
+        <li><a href="{{ '/donations' | relative_url }}" class="sidebar__nav-link">Donations</a></li>
       </ul>
     </nav>
 
     <!-- Accessibility Controls -->
     <section class="sidebar__section">
       <h2 class="sidebar__section-title">Accessibility</h2>
-
       <div class="accessibility-controls">
 
         <div class="control-group">
@@ -101,7 +101,7 @@
 
   </aside>
 
-  <!-- Sidebar overlay -->
+  <!-- Sidebar Overlay -->
   <div class="sidebar-overlay" data-sidebar-overlay></div>
 
   <!-- Header include -->
@@ -120,7 +120,13 @@
 </div>
 
 <!-- Scripts -->
+<script src="{{ '/assets/js/menu.js' | relative_url }}" defer></script>
+{% if page.layout == 'calendar' %}
+<script src="{{ '/assets/js/calendar.js' | relative_url }}" defer></script>
+{% endif %}
 <script src="{{ '/assets/js/app.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/accessibility.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/security.js' | relative_url }}" defer></script>
 
 </body>
 </html>
