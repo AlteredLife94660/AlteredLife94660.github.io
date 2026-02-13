@@ -1,33 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta name="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;"> 
-    <!-- Basic header content -->
-    <title>{{ page.title }} - {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-    <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="site-wrapper">
-        {% include header.html %}
-    
-        <main class="content">
-            <div class="container">
-                {{ content }}
-            </div>
-        </main>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% include footer.html %}
-    </div>
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="Content-Security-Policy"
+      content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+               script-src 'self';
+               style-src 'self' https://fonts.googleapis.com;
+               font-src https://fonts.gstatic.com;">
+
+<title>{{ page.title }} - {{ site.title }}</title>
+
+<!-- Prevent Theme Flash -->
+<script>
+  const savedFontSize = localStorage.getItem('fontSize');
+  const savedSpacing = localStorage.getItem('spacing');
+  const savedThemeColor = localStorage.getItem('themeColor');
+
+  if (savedFontSize)
+    document.documentElement.style.fontSize = savedFontSize + 'px';
+
+  if (savedSpacing)
+    document.documentElement.style.setProperty('--spacing-md', savedSpacing + 'rem');
+
+  if (savedThemeColor)
+    document.documentElement.style.setProperty('--color-primary', savedThemeColor);
+</script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ '/assets/css/variables.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/sidebar.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/calendar.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+</head>
+
+<body>
+
+<a href="#main-content" class="skip-link">
+  Skip to main content
+</a>
+
+<div class="site-wrapper">
+
+  <!-- Sidebar Toggle -->
+  <button 
+    class="sidebar-toggle"
+    data-toggle-sidebar
+    aria-label="Toggle sidebar"
+    aria-expanded="false">
+    ☰
+  </button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" data-sidebar aria-hidden="true">
     
-    <script src="/assets/js/scripts.js"></script>
+    <div class="sidebar__header">
+      <h1 class="sidebar__title">Navigation</h1>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <ul class="sidebar__nav">
+        <li><a href="{{ '/' | relative_url }}" class="sidebar__nav-link">Home</a></li>
+        <li><a href="{{ '/calendar' | relative_url }}" class="sidebar__nav-link">Calendar</a></li>
+        <li><a href="{{ '/about' | relative_url }}" class="sidebar__nav-link">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- Accessibility -->
+    <section class="sidebar__section">
+      <h2 class="sidebar__section-title">Accessibility</h2>
+
+      <div class="accessibility-controls">
+
+        <div class="control-group">
+          <label for="font-size">Font Size</label>
+          <input type="range" id="font-size" min="14" max="22" value="16">
+        </div>
+
+        <div class="control-group">
+          <label for="spacing">Spacing</label>
+          <input type="range" id="spacing" min="0.8" max="1.5" step="0.1" value="1">
+        </div>
+
+        <div class="control-group">
+          <label for="theme-color">Theme Color</label>
+          <input type="color" id="theme-color">
+        </div>
+
+      </div>
+    </section>
+
+  </aside>
+
+  <div class="sidebar-overlay" data-sidebar-overlay></div>
+
+  <!-- Header Include -->
+  {% include header.html %}
+
+  <!-- Main Content -->
+  <main id="main-content" class="content">
+    <div class="container">
+      {{ content }}
+    </div>
+  </main>
+
+  <!-- Footer Include -->
+  {% include footer.html %}
+
+</div>
+
+<!-- Scripts -->
+<script src="{{ '/assets/js/menu.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/accessibility.js' | relative_url }}" defer></script>
+
+{% if page.layout == 'calendar' %}
+<script src="{{ '/assets/js/calendar.js' | relative_url }}" defer></script>
+{% endif %}
+
 </body>
 </html>
