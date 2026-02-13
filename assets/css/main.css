@@ -1,71 +1,40 @@
 /* Body */
 body {
-    font-family: var(--font-family-main);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height);
-    color: var(--color-text);
-    background: var(--color-background);
-    margin: 0;
-    padding: 0;
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background: var(--color-background);
+  margin: 0;
+  padding: 0;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 1000;
+}
+.skip-link:focus {
+  left: var(--spacing-md);
+  top: var(--spacing-md);
+  width: auto;
+  height: auto;
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  text-decoration: none;
 }
 
 /* Header wrapper */
 .site-header {
-    background: var(--color-white);
-    box-shadow: var(--shadow);
-    padding: var(--spacing-sm) 0;
-    position: relative;
-    z-index: 100;
-}
-
-/* Main Navigation */
-.main-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-md);
-}
-
-.nav-logo a {
-    color: #2c3e50;
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    text-decoration: none;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: var(--spacing-lg);
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li a {
-    color: #2c3e50;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-}
-
-.nav-links li a:hover {
-    background-color: var(--color-background);
-    color: var(--color-primary);
-}
-
-.nav-links li a.active {
-    border-bottom: 2px solid var(--color-primary);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .main-nav {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--spacing-sm);
-    }
-    .na
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+  padding: var(--spacing-sm) 0;
+  position: relative;
+  z-in
