@@ -3,12 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const fontSizeInput = document.getElementById('font-size');
   const spacingInput = document.getElementById('spacing');
   const themeColorInput = document.getElementById('theme-color');
+  const themeColorInput2 = document.getElementById('theme-color2');
   const themeToggleBtn = document.getElementById('theme-toggle');
 
   // --- Apply saved preferences immediately ---
   const savedFontSize = localStorage.getItem('fontSize');
   const savedSpacing = localStorage.getItem('spacing');
   const savedThemeColor = localStorage.getItem('themeColor');
+  const savedThemeColor2 = localStorage.getItem('themeColor2');
   const savedTheme = localStorage.getItem('theme');
 
   if (savedFontSize) {
@@ -25,7 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.style.setProperty('--color-primary', savedThemeColor);
     if (themeColorInput) themeColorInput.value = savedThemeColor;
   }
-
+  
+  if (savedThemeColor2) {
+    document.documentElement.style.setProperty('--color-secondary', savedThemeColor2);
+    if (themeColorInput2) themeColorInput2.value = savedThemeColor2;
+  }
+  
   if (savedTheme) {
     document.documentElement.setAttribute('data-theme', savedTheme);
   }
@@ -78,6 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (themeColorInput2) {
+    themeColorInput2.addEventListener('input', e => {
+      const value = e.target.value;
+      document.documentElement.style.setProperty('--color-secondary', value);
+      localStorage.setItem('themeColor2', value);
+      updateUI();
+    });
+  }
+  
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
