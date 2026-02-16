@@ -4,7 +4,6 @@ theme: jekyll-theme-minimal # You can change this to other supported themes
 permalink: pretty
 baseurl: "none"
 url: "https://alteredlife94660.github.io"
-object-scr: "none"
 
 # Build settings
 markdown: kramdown
