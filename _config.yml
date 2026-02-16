@@ -2,7 +2,7 @@ title: TGB
 description: TGB website, testing space for future ideas
 theme: jekyll-theme-minimal # You can change this to other supported themes
 permalink: pretty
-baseurl: "none"
+baseurl: ""
 url: "https://alteredlife94660.github.io"
 
 # Build settings
