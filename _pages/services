@@ -1,0 +1,15 @@
+---
+layout: default
+title: Services
+description: Services offered
+permalink: /services
+last_modified_at: 2026-02-16
+---
+
+<main id="main-content" class="content services-page">
+  <div class="container" id="servicesContent">
+    <h1>Loading...</h1>
+  </div>
+</main>
+
+<script src="/assets/js/services.js" defer></script>
