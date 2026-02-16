@@ -21,11 +21,13 @@
   const savedFontSize = localStorage.getItem('fontSize');
   const savedSpacing = localStorage.getItem('spacing');
   const savedThemeColor = localStorage.getItem('themeColor');
+  const savedThemeColor2 = localStorage.getItem('themeColor2');
   const savedTheme = localStorage.getItem('theme');
 
   if (savedFontSize) document.documentElement.style.fontSize = savedFontSize + 'px';
   if (savedSpacing) document.documentElement.style.setProperty('--spacing-md', savedSpacing + 'rem');
   if (savedThemeColor) document.documentElement.style.setProperty('--color-primary', savedThemeColor);
+  if (savedThemeColor2) document.documentElement.style.setProperty('--color-secondary', savedThemeColor2);
   if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
 </script>
 
@@ -82,6 +84,11 @@
         <div class="control-group">
           <label for="theme-color">Theme Color</label>
           <input type="color" id="theme-color" value="#8e44ad">
+        </div>
+            
+        <div class="control-group">
+          <label for="theme-color2">Secondary Color</label>
+          <input type="color" id="theme-color2" value="#3498db">
         </div>
 
         <div class="control-group">
