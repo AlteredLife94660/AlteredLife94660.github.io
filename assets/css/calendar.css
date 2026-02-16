@@ -11,8 +11,8 @@
   border-radius: var(--border-radius);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow);
-  max-width: 1200px;
-  width: 90%;
+  max-width: 1000px;
+  width: 80%;
   margin: 0 auto; /* Center the calendar wrapper */
   transition: background var(--transition-speed) ease, color var(--transition-speed) ease, padding var(--transition-speed) ease;
 }
