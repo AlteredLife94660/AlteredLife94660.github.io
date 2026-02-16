@@ -12,7 +12,7 @@
   padding: var(--spacing-lg);
   box-shadow: var(--shadow);
   max-width: 1000px;
-  width: 75%;
+  width: 80%;
   margin: 0 auto; /* Center the calendar wrapper */
   transition: background var(--transition-speed) ease, color var(--transition-speed) ease, padding var(--transition-speed) ease;
 }
