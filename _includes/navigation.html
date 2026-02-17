@@ -15,8 +15,19 @@
   <ul class="nav-links">
     <li><a href="{{ '/' | relative_url }}">Home</a></li>
     <li><a href="{{ '/about' | relative_url }}">About</a></li>
-    <li><a href="{{ '/services' | relative_url }}">Services</a></li>
-    <li><a href="{{ '/calendar' | relative_url }}">Calendar</a></li>
+    <li class="dropdown">
+      <a href="{{ '/services' | relative_url }}">Services</a></li>
+      <ul class="dropdown-menu">
+        <li><a href="{{ '/calendar' | relative_url }}">Calendar</a></li>
+    <li class="dropdown">
+      <a href="{{ '/worldbuilding' | relative_url }}">World Building</a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ '/blogs' | relative_url }}">World Setting (COMING SOON)</a></li>
+        <li><a href="{{ '/blogs' | relative_url }}">Societies (COMING SOON)</a></li>
+        <li><a href="{{ '/blogs' | relative_url }}">Religions (COMING SOON)</a></li>
+        <li><a href="{{ '/blogs' | relative_url }}">Organisations (COMING SOON)</a></li>
+        <li><a href="{{ '/blogs' | relative_url }}">Story Blog (COMING SOON)</a></li>
+      </ul>
     <li><a href="{{ '/donations' | relative_url }}">Donations</a></li>
   </ul>
 </nav>
