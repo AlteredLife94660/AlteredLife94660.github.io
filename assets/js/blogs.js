@@ -1,10 +1,10 @@
 const Blogs = (() => {
-  const blogContainer = document.getElementById('blogEvents');
+  const blogsContainer = document.getElementById('blogsEvents');
   
   let events = [];
   
   const init = async () => {
-    if (!blogContainer) return;
+    if (!blogsContainer) return;
 
     // Fetch events from JSON
     try {
@@ -17,21 +17,21 @@ const Blogs = (() => {
     renderBlogs();
 
   const renderBlogs = () => {
-    blogContainer.innerHTML = '';
+    blogsContainer.innerHTML = '';
 
     const now = new Date();
 
     // Sort blogs by date
-    blog.sort((a, b) => new Date(a.date) - new Date(b.date));
+    events.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     // Render blogs
-    if (blog.length) {
-      blog.forEach(ev => {
+    if (events.length) {
+      events.forEach(ev => {
         const card = createEventCard(ev);
-        blogContainer.appendChild(card);
+        blogsContainer.appendChild(card);
       });
     } else {
-      blogContainer.innerHTML = '<p>No blogs.</p>';
+      blogsContainer.innerHTML = '<p>No blogs.</p>';
     }
   };
 
