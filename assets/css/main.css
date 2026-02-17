@@ -80,6 +80,10 @@ a:hover {
   margin: 0;
 }
 
+.nav-links > li {
+  position: relative;
+}
+
 .nav-links li a {
   color: var(--color-text);
   font-weight: var(--font-weight-normal);
@@ -92,10 +96,6 @@ a:hover {
 .nav-links li a.active {
   color: var(--color-primary);
   background: rgba(142, 68, 173, 0.1);
-}
-
-.nav-links > li {
-  position: relative;
 }
 
 /* ========================
