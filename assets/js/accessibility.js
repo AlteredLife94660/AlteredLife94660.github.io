@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   // --- Accessibility Controls ---
   const fontSizeInput = document.getElementById('font-size');
-  const spacingInput = document.getElementById('spacing');
+  const fontSelectInput = document.getElementById('font-select');
   const themeColorInput = document.getElementById('theme-color');
   const themeColorInput2 = document.getElementById('theme-color2');
   const themeToggleBtn = document.getElementById('theme-toggle');
 
   // --- Apply saved preferences immediately ---
   const savedFontSize = localStorage.getItem('fontSize');
-  const savedSpacing = localStorage.getItem('spacing');
+  const savedFontSelect = localStorage.getItem('fontSelect');
   const savedThemeColor = localStorage.getItem('themeColor');
   const savedThemeColor2 = localStorage.getItem('themeColor2');
   const savedTheme = localStorage.getItem('theme');
@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fontSizeInput) fontSizeInput.value = savedFontSize;
   }
 
-  if (savedSpacing) {
-    document.documentElement.style.setProperty('--spacing-md', savedSpacing + 'rem');
-    if (spacingInput) spacingInput.value = savedSpacing;
+  if (savedFontSelect) {
+    document.documentElement.style.setProperty('--font-family-main', savedFontSelect);
+    if (fontSelectInput) fontSelectInput.value = savedFontSelect;
   }
 
   if (savedThemeColor) {
@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (spacingInput) {
-    spacingInput.addEventListener('input', e => {
+  if (fontSelectInput) {
+    fontSelectInput.addEventListener('change', e => {
       const value = e.target.value;
-      document.documentElement.style.setProperty('--spacing-md', value + 'rem');
-      localStorage.setItem('spacing', value);
+          document.documentElement.style.setProperty('--font-family-main', savedFontSelect);
+      localStorage.setItem('fontSelect', value);
       updateUI();
     });
   }
