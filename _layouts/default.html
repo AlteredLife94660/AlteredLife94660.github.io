@@ -25,7 +25,7 @@
   const savedTheme = localStorage.getItem('theme');
 
   if (savedFontSize) document.documentElement.style.fontSize = savedFontSize + 'px';
-  if (savedFontSelect) document.documentElement.style.setProperty = savedFontSelect;
+  if (savedFontSelect) document.documentElement.style.setProperty('--font-family-main', savedFontSelect);
   if (savedThemeColor) document.documentElement.style.setProperty('--color-primary', savedThemeColor);
   if (savedThemeColor2) document.documentElement.style.setProperty('--color-secondary', savedThemeColor2);
   if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
