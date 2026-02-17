@@ -4,5 +4,5 @@ document.addEventListener('DOMContentLoaded', () => {
   Theme.init();
   Accessibility.init();
   Calendar?.init?.();
-  Blog?.init?.();
+  Blogs?.init?.();
 });
