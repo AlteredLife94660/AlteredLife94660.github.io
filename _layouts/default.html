@@ -19,13 +19,13 @@
 <!-- Prevent Flash of User Theme -->
 <script>
   const savedFontSize = localStorage.getItem('fontSize');
-  const savedSpacing = localStorage.getItem('spacing');
+  const savedFontSelect = localStorage.getItem('fontSelect');
   const savedThemeColor = localStorage.getItem('themeColor');
   const savedThemeColor2 = localStorage.getItem('themeColor2');
   const savedTheme = localStorage.getItem('theme');
 
   if (savedFontSize) document.documentElement.style.fontSize = savedFontSize + 'px';
-  if (savedSpacing) document.documentElement.style.setProperty('--spacing-md', savedSpacing + 'rem');
+  if (savedFontSelect) document.documentElement.style.setProperty = savedFontSelect;
   if (savedThemeColor) document.documentElement.style.setProperty('--color-primary', savedThemeColor);
   if (savedThemeColor2) document.documentElement.style.setProperty('--color-secondary', savedThemeColor2);
   if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
@@ -33,7 +33,10 @@
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/open-dyslexic.css" rel="stylesheet">
 
+
+      
 <!-- Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/variables.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -79,8 +82,13 @@
         </div>
 
         <div class="control-group">
-          <label for="spacing">Spacing</label>
-          <input type="range" id="spacing" min="0.5" max="1.2" step="0.1" value="1">
+          <label for="font-select">Choose Font:</label>
+          <select id="font-select">
+            <option value="'Raleway', sans-serif">Default</option>
+            <option value="'Playfair Display', serif">Stylish</option>
+            <option value="'OpenDyslexic', sans-serif">Dyslexia-Friendly</option>
+            <option value="'Arial', sans-serif">Accessibility</option>
+          </select>
         </div>
 
         <div class="control-group">
