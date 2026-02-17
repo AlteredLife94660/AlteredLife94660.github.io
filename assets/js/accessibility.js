@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const value = e.target.value;
           document.documentElement.style.setProperty('--font-family-main', savedFontSelect);
       localStorage.setItem('fontSelect', value);
-      updateUI();
+      location.reload();
     });
   }
 
