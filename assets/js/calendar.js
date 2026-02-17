@@ -16,7 +16,7 @@ const Calendar = (() => {
 
     // Fetch events from JSON
     try {
-      const response = await fetch('/assets/data/events.json');
+      const response = await fetch('/assets/content/events.json');
       events = await response.json();
     } catch (err) {
       console.error('Error loading events:', err);
