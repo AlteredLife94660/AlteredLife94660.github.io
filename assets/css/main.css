@@ -94,13 +94,17 @@ a:hover {
   background: rgba(142, 68, 173, 0.1);
 }
 
+.nav-links > li {
+  position: relative;
+}
+
 /* ========================
    Nav Drop Down Menu
 ======================== */
 
 .dropdown-menu {
   display: none;
-  position: relative;
+  position: absolute;
   top: 100%;
   left: 0;
 
