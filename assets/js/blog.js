@@ -64,4 +64,4 @@ const Blogs = (() => {
   return { init };
 })();
 
-document.addEventListener('DOMContentLoaded', () => Calendar.init());
+document.addEventListener('DOMContentLoaded', () => Blog.init());
