@@ -1,34 +1,35 @@
 const Blogs = (() => {
   const blogsContainer = document.getElementById('blogsEvents');
-  
   let events = [];
-  
+
   const init = async () => {
     if (!blogsContainer) return;
 
-    // Fetch events from JSON
     try {
-      const response = await fetch('/assets/content/blogs.json');
+      const response = await fetch('{{ "/assets/content/blogs.json" | relative_url }}');
+
+      if (!response.ok) {
+        throw new Error(`Could not load blogs (${response.status})`);
+      }
+
       events = await response.json();
     } catch (err) {
       console.error('Error loading blogs:', err);
+      blogsContainer.innerHTML = '<p>Sorry, there was an issue loading the blogs.</p>';
+      return;
     }
 
     renderBlogs();
+  };
 
   const renderBlogs = () => {
     blogsContainer.innerHTML = '';
 
-    const now = new Date();
-
-    // Sort blogs by date
     events.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    // Render blogs
     if (events.length) {
       events.forEach(ev => {
-        const card = createEventCard(ev);
-        blogsContainer.appendChild(card);
+        blogsContainer.appendChild(createEventCard(ev));
       });
     } else {
       blogsContainer.innerHTML = '<p>No blogs.</p>';
@@ -36,29 +37,35 @@ const Blogs = (() => {
   };
 
   const createEventCard = (ev) => {
-    const div = document.createElement('div');
+    const div = document.createElement('article');
     div.className = 'event-card';
-    div.innerHTML = `
-      <h4>${ev.title}</h4>
-      <p class="event-date">${formatDateReadable(ev.date)}</p>
-      <p>${ev.description}</p>
-    `;
+
+    const title = document.createElement('h4');
+    title.textContent = ev.title;
+
+    const date = document.createElement('p');
+    date.className = 'event-date';
+    date.textContent = formatDateReadable(ev.date);
+
+    const description = document.createElement('p');
+    description.textContent = ev.description;
+
+    div.append(title, date, description);
     return div;
   };
 
-  const getMonthName = (monthIndex) => {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    return months[monthIndex];
-  };
-
-  const formatDate = (date) => {
-    // Convert date to YYYY-MM-DD format
-    return date.toISOString().split('T')[0];
-  };
-
   const formatDateReadable = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    const date = new Date(`${dateStr}T00:00:00`);
+
+    if (Number.isNaNaN(date.getTime())) {
+      return dateStr;
+    }
+
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   return { init };
