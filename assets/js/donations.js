@@ -2,18 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.donation-toggle').forEach((button) => {
     const panel = document.getElementById(button.getAttribute('aria-controls'));
     const image = panel?.querySelector('img[data-qr-src]');
-    const placeholder = panel?.querySelector('.qr-placeholder');
 
-    if (!panel || !image || !placeholder) return;
+    if (!panel || !image) return;
 
     image.addEventListener('load', () => {
       image.hidden = false;
-      placeholder.hidden = true;
     });
 
     image.addEventListener('error', () => {
       image.hidden = true;
-      placeholder.hidden = false;
     });
 
     button.addEventListener('click', () => {
