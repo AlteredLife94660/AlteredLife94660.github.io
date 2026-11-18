@@ -3,29 +3,40 @@ layout: default
 title: Donations
 description: Donations to me
 permalink: /donations
-last_modified_at: 2026-02-13
+last_modified_at: 2026-11-18
 ---
 <div class="hero-section">
-    <h1>Donations & Payment</h1>
+  <h1>Donations &amp; Payment</h1>
+  <p>Select a payment option to view its QR code.</p>
 </div>
 
-<div class="feature-grid">
-    <div class="feature-card">
-        <h3>Monero</h3>
+<section class="donations-page" aria-label="Donation payment options">
+  <div class="donation-options" role="list">
+    <button class="feature-card donation-option" type="button" data-donation="monero" aria-controls="donationQr" aria-pressed="false" role="listitem">
+      <h3>Monero</h3>
+    </button>
+    <button class="feature-card donation-option" type="button" data-donation="bitcoin" aria-controls="donationQr" aria-pressed="false" role="listitem">
+      <h3>Bitcoin</h3>
+    </button>
+    <button class="feature-card donation-option" type="button" data-donation="paypal" aria-controls="donationQr" aria-pressed="false" role="listitem">
+      <h3>PayPal</h3>
+    </button>
+    <button class="feature-card donation-option" type="button" data-donation="option4" aria-controls="donationQr" aria-pressed="false" role="listitem">
+      <h3>4th</h3>
+    </button>
+    <button class="feature-card donation-option" type="button" data-donation="option5" aria-controls="donationQr" aria-pressed="false" role="listitem">
+      <h3>5th</h3>
+    </button>
+    <button class="feature-card donation-option" type="button" data-donation="option6" aria-controls="donationQr" aria-pressed="false" role="listitem">
+      <h3>6th</h3>
+    </button>
+  </div>
+
+  <div id="donationQr" class="donation-qr" aria-live="polite" hidden>
+    <h2 id="donationQrTitle"></h2>
+    <img id="donationQrImage" src="" alt="" hidden>
+    <div id="donationQrPlaceholder" class="qr-placeholder" aria-label="QR code placeholder">
+      <span>QR code placeholder</span>
     </div>
-    <div class="feature-card">
-        <h3>Bitcoin</h3>
-    </div>
-    <div class="feature-card">
-        <h3>PayPal</h3>
-    </div> 
-    <div class="feature-card">
-        <h3>4th</h3>
-    </div>
-    <div class="feature-card">
-        <h3>5th</h3>
-    </div>
-    <div class="feature-card">
-        <h3>6th</h3>
-    </div>
-</div>
+  </div>
+</section>
