@@ -50,25 +50,16 @@
   margin-top: var(--spacing-lg);
 }
 
+.donation-qr[hidden] {
+  display: none !important;
+}
+
 .donation-qr img {
   display: block;
   width: min(100%, 360px);
   height: auto;
   margin: 0 auto;
   border-radius: var(--border-radius);
-}
-
-.qr-placeholder {
-  display: grid;
-  place-items: center;
-  width: min(100%, 360px);
-  min-height: 220px;
-  margin: 0 auto;
-  padding: var(--spacing-md);
-  box-sizing: border-box;
-  border: 2px dashed var(--color-border);
-  border-radius: var(--border-radius);
-  background: rgba(142, 68, 173, 0.06);
 }
 
 @media (max-width: 640px) {
