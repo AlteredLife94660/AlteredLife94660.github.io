@@ -1,0 +1,31 @@
+---
+layout: default
+title: World Building
+description: World Building Blogs
+permalink: /worldbuilding
+last_modified_at: 2026-11-18
+---
+<div class="hero-section">
+    <h1>World Building</h1>
+    <p>On going world building blog into my own creation.</p>
+</div>
+
+<div class="feature-grid">
+    <div class="feature-card">
+        <h3>World Setting</h3>
+    </div>
+    <div class="feature-card">
+        <h3>Societies</h3>
+    </div>
+    <div class="feature-card">
+        <h3>Religions</h3>
+    </div>
+    <div class="feature-card">
+        <h3>Organistations</h3>
+    </div>
+    <a href=""{{ '/blogs' | relative_url }}"">
+      <div class="feature-card">
+        <h3>Story Blog</h3>
+      </div>
+    </a>
+</div>
