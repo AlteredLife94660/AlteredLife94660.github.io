@@ -6,16 +6,19 @@ const Blogs = (() => {
     if (!blogsContainer) return;
 
     try {
-      const response = await fetch('{{ "/assets/content/blogs.json" | relative_url }}');
-
+      const response = await fetch(blogsContainer.dataset.blogsSrc);
       if (!response.ok) {
         throw new Error(`Could not load blogs (${response.status})`);
       }
 
-      events = await response.json();
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error('Blog data must be a JSON array');
+      }
+      events = data;
     } catch (err) {
       console.error('Error loading blogs:', err);
-      blogsContainer.innerHTML = '<p>Sorry, there was an issue loading the blogs.</p>';
+      blogsContainer.textContent = 'Sorry, there was an issue loading the blogs.';
       return;
     }
 
@@ -23,43 +26,38 @@ const Blogs = (() => {
   };
 
   const renderBlogs = () => {
-    blogsContainer.innerHTML = '';
-
+    blogsContainer.replaceChildren();
     events.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    if (events.length) {
-      events.forEach(ev => {
-        blogsContainer.appendChild(createEventCard(ev));
-      });
-    } else {
-      blogsContainer.innerHTML = '<p>No blogs.</p>';
+    if (!events.length) {
+      blogsContainer.textContent = 'No blogs.';
+      return;
     }
+
+    events.forEach(event => blogsContainer.appendChild(createEventCard(event)));
   };
 
-  const createEventCard = (ev) => {
-    const div = document.createElement('article');
-    div.className = 'event-card';
+  const createEventCard = (event) => {
+    const card = document.createElement('article');
+    card.className = 'event-card';
 
     const title = document.createElement('h4');
-    title.textContent = ev.title;
+    title.textContent = event.title || 'Untitled';
 
     const date = document.createElement('p');
     date.className = 'event-date';
-    date.textContent = formatDateReadable(ev.date);
+    date.textContent = formatDateReadable(event.date);
 
     const description = document.createElement('p');
-    description.textContent = ev.description;
+    description.textContent = event.description || '';
 
-    div.append(title, date, description);
-    return div;
+    card.append(title, date, description);
+    return card;
   };
 
   const formatDateReadable = (dateStr) => {
     const date = new Date(`${dateStr}T00:00:00`);
-
-    if (Number.isNaNaN(date.getTime())) {
-      return dateStr;
-    }
+    if (Number.isNaN(date.getTime())) return dateStr || '';
 
     return date.toLocaleDateString(undefined, {
       year: 'numeric',

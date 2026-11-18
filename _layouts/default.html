@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta name="Content-Security-Policy"
+<meta http-equiv="Content-Security-Policy"
       content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
                script-src 'self';
                style-src 'self' https://fonts.googleapis.com;
@@ -35,15 +35,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/open-dyslexic.css" rel="stylesheet">
 
-
-      
 <!-- Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/variables.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/sidebar.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/about.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/calendar.css' | relative_url }}">
-      
+{% if page.url == '/donations' %}
+<link rel="stylesheet" href="{{ '/assets/css/donations.css' | relative_url }}">
+{% endif %}
 </head>
 
 <body>
@@ -67,7 +67,6 @@
         <li><a href="{{ '/calendar' | relative_url }}" class="sidebar__nav-link">Calendar</a></li>
         <li><a href="{{ '/worldbuilding' | relative_url }}" class="sidebar__nav-link">World Building</a></li>
         <li><a href="{{ '/donations' | relative_url }}" class="sidebar__nav-link">Donations</a></li>
-        
       </ul>
     </nav>
 
@@ -75,7 +74,6 @@
     <section class="sidebar__section">
       <h2 class="sidebar__section-title">Accessibility</h2>
       <div class="accessibility-controls">
-
         <div class="control-group">
           <label for="font-size">Font Size</label>
           <input type="range" id="font-size" min="10" max="30" value="16">
@@ -101,10 +99,8 @@
           <label for="theme-toggle">Dark Mode</label>
           <button id="theme-toggle" class="theme-toggle">Toggle</button>
         </div>
-
       </div>
     </section>
-
   </aside>
 
   <!-- Sidebar Overlay -->
@@ -133,18 +129,18 @@
 {% if page.layout == 'services' %}
 <script src="{{ '/assets/js/services.js' | relative_url }}" defer></script>
 {% endif %}
-{% if page.layout == 'donations' %}
+{% if page.url == '/donations' %}
 <script src="{{ '/assets/js/donations.js' | relative_url }}" defer></script>
 {% endif %}
 {% if page.layout == 'about' %}
 <script src="{{ '/assets/js/about.js' | relative_url }}" defer></script>
 {% endif %}
-{% if page.layout == 'blogs' %}
-<script src="{{ '/assets/js/blog.js' | relative_url }}" defer></script>
+{% if page.url == '/blogs' %}
+<script src="{{ '/assets/js/blogs.js' | relative_url }}" defer></script>
 {% endif %}
 <script src="{{ '/assets/js/app.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/accessibility.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/security.js' | relative_url }}" defer></script>
-      
+
 </body>
 </html>

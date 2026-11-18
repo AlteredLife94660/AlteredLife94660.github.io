@@ -1,0 +1,78 @@
+/* Donation options are intentionally two equal columns on wide screens. */
+.donations-page {
+  width: 100%;
+}
+
+.donation-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-xl);
+  align-items: stretch;
+}
+
+.donation-card {
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: var(--border-radius);
+  background: var(--color-background);
+  color: var(--color-text);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.donation-card h2 {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+.donation-toggle {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 0;
+  border-radius: var(--border-radius);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+
+.donation-toggle:hover,
+.donation-toggle:focus-visible {
+  background: var(--color-secondary);
+}
+
+.donation-toggle:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+.donation-qr {
+  margin-top: var(--spacing-lg);
+}
+
+.donation-qr img {
+  display: block;
+  width: min(100%, 360px);
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+}
+
+.qr-placeholder {
+  display: grid;
+  place-items: center;
+  width: min(100%, 360px);
+  min-height: 220px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  box-sizing: border-box;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--border-radius);
+  background: rgba(142, 68, 173, 0.06);
+}
+
+@media (max-width: 640px) {
+  .donation-options {
+    grid-template-columns: 1fr;
+  }
+}

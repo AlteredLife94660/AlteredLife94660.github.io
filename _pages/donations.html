@@ -7,36 +7,31 @@ last_modified_at: 2026-11-18
 ---
 <div class="hero-section">
   <h1>Donations &amp; Payment</h1>
-  <p>Select a payment option to view its QR code.</p>
+  <p>Select Bitcoin or Monero to view its QR code.</p>
 </div>
 
 <section class="donations-page" aria-label="Donation payment options">
-  <div class="donation-options" role="list">
-    <button class="feature-card donation-option" type="button" data-donation="monero" aria-controls="donationQr" aria-pressed="false" role="listitem">
-      <h3>Monero</h3>
-    </button>
-    <button class="feature-card donation-option" type="button" data-donation="bitcoin" aria-controls="donationQr" aria-pressed="false" role="listitem">
-      <h3>Bitcoin</h3>
-    </button>
-    <button class="feature-card donation-option" type="button" data-donation="paypal" aria-controls="donationQr" aria-pressed="false" role="listitem">
-      <h3>PayPal</h3>
-    </button>
-    <button class="feature-card donation-option" type="button" data-donation="option4" aria-controls="donationQr" aria-pressed="false" role="listitem">
-      <h3>4th</h3>
-    </button>
-    <button class="feature-card donation-option" type="button" data-donation="option5" aria-controls="donationQr" aria-pressed="false" role="listitem">
-      <h3>5th</h3>
-    </button>
-    <button class="feature-card donation-option" type="button" data-donation="option6" aria-controls="donationQr" aria-pressed="false" role="listitem">
-      <h3>6th</h3>
-    </button>
-  </div>
+  <div class="donation-options">
+    <article class="donation-card">
+      <h2>Bitcoin</h2>
+      <button class="donation-toggle" type="button" aria-expanded="false" aria-controls="bitcoinQr">
+        Show Bitcoin QR code
+      </button>
+      <div id="bitcoinQr" class="donation-qr" hidden>
+        <img data-qr-src="{{ '/assets/content/images/donations/QR_bitcoin.jpg' | relative_url }}" alt="Bitcoin donation QR code" hidden>
+        <p class="qr-placeholder" role="status">QR code placeholder. Add QR_bitcoin.jpg to assets/content/images/donations/.</p>
+      </div>
+    </article>
 
-  <div id="donationQr" class="donation-qr" aria-live="polite" hidden>
-    <h2 id="donationQrTitle"></h2>
-    <img id="donationQrImage" src="" alt="" hidden>
-    <div id="donationQrPlaceholder" class="qr-placeholder" aria-label="QR code placeholder">
-      <span>QR code placeholder</span>
-    </div>
+    <article class="donation-card">
+      <h2>Monero</h2>
+      <button class="donation-toggle" type="button" aria-expanded="false" aria-controls="moneroQr">
+        Show Monero QR code
+      </button>
+      <div id="moneroQr" class="donation-qr" hidden>
+        <img data-qr-src="{{ '/assets/content/images/donations/QR_monero.jpg' | relative_url }}" alt="Monero donation QR code" hidden>
+        <p class="qr-placeholder" role="status">QR code placeholder. Add QR_monero.jpg to assets/content/images/donations/.</p>
+      </div>
+    </article>
   </div>
 </section>
