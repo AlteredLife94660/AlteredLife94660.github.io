@@ -1,4 +1,4 @@
-Place the QR images in this directory using these exact names:
+Place the QR images in donations directory using these exact names:
 
 - QR_bitcoin.jpg
 - QR_monero.jpg
